@@ -43,10 +43,16 @@ class _MeasuredSizeState extends State<MeasuredSize> {
   var oldSize;
 
   void postFrameCallback(_) async {
+    if (!mounted){
+      return;
+    }
     var context = widgetKey.currentContext!;
 
     await Future.delayed(
         Duration(milliseconds: 100)); // wait till the image is drawn
+    if (!mounted){
+      return;
+    }
     Size newSize = context.size!;
     if (newSize == Size.zero) return;
     if (oldSize == newSize) return;
